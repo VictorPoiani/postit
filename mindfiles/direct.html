@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens — Post it</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&family=Leckerli+One&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&family=Poppins:ital,wght@1,600;1,700&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/lucides.css">
+
+    <style>
+        /* ============ MENSAGENS CSS ESPECÍFICO ============ */
+        .main {
+            overflow: hidden;
+            /* Evita scroll duplo com o chat */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        /* --- Lista de Contatos --- */
+        .contacts-list {
+            width: 320px;
+            border-right: 1px solid var(--divider);
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            height: 100%;
+        }
+
+        .contacts-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--divider);
+            background: var(--bg);
+        }
+
+        .contacts-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        .contacts-search {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--pill-bg);
+            border-radius: 999px;
+            padding: 10px 16px;
+        }
+
+        .contacts-search i {
+            width: 16px;
+            height: 16px;
+            color: var(--gray-400);
+        }
+
+        .contacts-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            color: var(--ink);
+            font-family: inherit;
+        }
+
+        .contacts-scroll {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f4f4f6;
+            transition: background 0.2s;
+        }
+
+        .contact-item:hover {
+            background: #f9fafb;
+        }
+
+        .contact-item.active {
+            background: #f4f4f6;
+            border-left: 3px solid var(--blue);
+        }
+
+        .contact-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            flex-shrink: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .c-2 {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #333;
+        }
+
+        .c-3 {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: #333;
+        }
+
+        .c-4 {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--ink);
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-time {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gray-400);
+        }
+
+        .contact-preview {
+            font-size: 13px;
+            color: var(--gray-600);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* --- Área do Chat --- */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #fcfcfd;
+            height: 100%;
+        }
+
+        .chat-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--divider);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .chat-header-name {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--ink);
+        }
+
+        .chat-header-status {
+            font-size: 12px;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .chat-header-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chat-header-actions .icon-btn {
+            background: transparent;
+            color: var(--gray-600);
+            border: 1px solid var(--divider);
+        }
+
+        .chat-header-actions .icon-btn:hover {
+            background: #f4f4f6;
+            color: var(--ink);
+        }
+
+        .chat-history {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scrollbar-width: thin;
+        }
+
+        .message-wrapper {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+        }
+
+        .message-wrapper.sent {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+
+        .message-wrapper.received {
+            align-self: flex-start;
+            align-items: flex-start;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 15px;
+            line-height: 1.5;
+            position: relative;
+            word-wrap: break-word;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-wrapper.received .message {
+            background: #fff;
+            color: var(--ink);
+            border: 1px solid var(--divider);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-wrapper.sent .message {
+            background: var(--blue);
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: var(--gray-400);
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+
+        .chat-input-container {
+            padding: 16px 24px;
+            border-top: 1px solid var(--divider);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-action-btn {
+            background: none;
+            border: none;
+            color: var(--gray-400);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        .chat-action-btn:hover {
+            color: var(--blue);
+            background: #f4f4f6;
+        }
+
+        .chat-input-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: #f4f4f6;
+            border-radius: 24px;
+            padding: 10px 20px;
+        }
+
+        .chat-input-wrapper input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--ink);
+        }
+
+        .chat-input-wrapper input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .send-btn {
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .send-btn i {
+            width: 18px;
+            height: 18px;
+            margin-left: -2px;
+            /* Ajuste visual pro ícone de send */
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            background: #1d4ed8;
+        }
+
+        .send-btn:disabled {
+            background: var(--gray-400);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Animação digitando */
+        .typing-indicator {
+            align-self: flex-start;
+            background: #fff;
+            border: 1px solid var(--divider);
+            padding: 12px 16px;
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            display: none;
+            gap: 6px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: var(--gray-400);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes typingBounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .messages-layout {
+                flex-direction: column;
+            }
+
+            .contacts-list {
+                width: 100%;
+                height: 35%;
+                border-right: none;
+                border-bottom: 1px solid var(--divider);
+            }
+
+            .chat-area {
+                height: 65%;
+            }
+
+            .chat-history {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- ============ LEFT Sidebar ============ -->
+        <aside class="sidebar-left">
+            <div class="logo">
+                <img src="assets/net/postit.png" alt="Logo do site" onerror="this.style.display='none'">
+            </div>
+
+            <ul class="nav">
+                <li data-nav="home"><a class="nav-link" href="inicio.html"><i data-lucide="home"></i><span
+                            class="label">Home</span></a></li>
+                <li data-nav="explore"><a class="nav-link" href="inicio.html"><i data-lucide="compass"></i><span
+                            class="label">Explorar</span></a></li>
+                <li data-nav="notifications" class="active"><a class="nav-link" href="notificacoes.html"><i
+                            data-lucide="blocks"></i><span class="label">Atualizações</span></a></li>
+                <li data-nav="messages"><a class="nav-link" href="direct.html"><i data-lucide="mail"></i><span
+                            class="label">Mensagens</span></a></li>
+                <li data-nav="support"><a class="nav-link" href="inicio.html"><i data-lucide="heartHandshake"></i><span
+                            class="label">Apoie</span></a></li>
+                <li data-nav="settings"><a class="nav-link" href="inicio.html"><i data-lucide="settings"></i><span
+                            class="label">Configurações</span></a></li>
+            </ul>
+            <div class="sidebar-left-footer">
+                <div class="mini-avatar">
+                    <svg viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#ffd8a8" />
+                        <circle cx="14" cy="18" r="2" fill="#2b2b2b" />
+                        <circle cx="26" cy="18" r="2" fill="#2b2b2b" />
+                        <path d="M12 25c3 4 13 4 16 0" stroke="#2b2b2b" stroke-width="2" fill="none"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="mini-user-info">
+                    <div class="mini-user-name">Victor Poiani, <span class="sobriquet">o criador</span></div>
+                    <div class="mini-user-handle"><i data-lucide="atSign"></i>poiani</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============ Main Content ============ -->
+        <main class="main">
+            <div class="messages-layout">
+                <!-- Painel Esquerdo: Lista de Contatos -->
+                <div class="contacts-list">
+                    <div class="contacts-header">
+                        <h2>Mensagens</h2>
+                        <div class="contacts-search">
+                            <i data-lucide="search"></i>
+                            <input type="text" placeholder="Buscar mensagens...">
+                        </div>
+                    </div>
+
+                    <div class="contacts-scroll">
+                        <!-- Contato 1 -->
+                        <div class="contact-item active" data-name="Alice Santos" data-status="Online agora">
+                            <div class="contact-avatar">AS</div>
+                            <div class="contact-info">
+                                <div class="contact-name">
+                                    <span>Alice Santos</span>
+                                    <span class="contact-time">Agora</span>
+                                </div>
+                                <div class="contact-preview">Que incrível esse layout novo!</div>
+                            </div>
+                        </div>
+
+                        <!-- Contato 2 -->
+                        <div class="contact-item" data-name="Carlos M." data-status="Visto por último às 14:30">
+                            <div class="contact-avatar c-2">C</div>
+                            <div class="contact-info">
+                                <div class="contact-name">
+                                    <span>Carlos M.</span>
+                                    <span class="contact-time">14:30</span>
+                                </div>
+                                <div class="contact-preview">Me avisa quando postar o próximo artigo.</div>
+                            </div>
+                        </div>
+
+                        <!-- Contato 3 -->
+                        <div class="contact-item" data-name="Beatriz Dev" data-status="Online agora">
+                            <div class="contact-avatar c-3">BD</div>
+                            <div class="contact-info">
+                                <div class="contact-name">
+                                    <span>Beatriz Dev</span>
+                                    <span class="contact-time">Ontem</span>
+                                </div>
+                                <div class="contact-preview">Conseguiu resolver aquele bug no CSS?</div>
+                            </div>
+                        </div>
+
+                        <!-- Contato 4 -->
+                        <div class="contact-item" data-name="Grupo: Frontend BR" data-status="32 membros">
+                            <div class="contact-avatar c-4"><i data-lucide="users"></i></div>
+                            <div class="contact-info">
+                                <div class="contact-name">
+                                    <span>Frontend BR</span>
+                                    <span class="contact-time">Terça</span>
+                                </div>
+                                <div class="contact-preview">João: Acabei de compartilhar um link útil.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel Direito: Área de Chat -->
+                <div class="chat-area">
+                    <div class="chat-header">
+                        <div class="chat-header-info">
+                            <div class="contact-avatar" id="currentAvatar">AS</div>
+                            <div>
+                                <div class="chat-header-name" id="currentName">Alice Santos</div>
+                                <div class="chat-header-status" id="currentStatus">Online agora</div>
+                            </div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <button class="icon-btn" title="Ligar"><i data-lucide="phone"></i></button>
+                            <button class="icon-btn" title="Mais opções"><i data-lucide="more-vertical"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="chat-history" id="chatHistory">
+                        <div class="message-wrapper received">
+                            <div class="message">Oi Victor! Vi sua última atualização no blog, ficou sensacional.</div>
+                            <div class="message-time">10:42</div>
+                        </div>
+                        <div class="message-wrapper received">
+                            <div class="message">Que incrível esse layout novo!</div>
+                            <div class="message-time">10:43</div>
+                        </div>
+
+                        <!-- Indicador de digitação (escondido por padrão) -->
+                        <div class="typing-indicator" id="typingIndicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <button class="chat-action-btn" title="Anexar arquivo"><i data-lucide="paperclip"></i></button>
+                        <div class="chat-input-wrapper">
+                            <input type="text" id="chatInput" placeholder="Escreva uma mensagem..." autocomplete="off">
+                            <button class="chat-action-btn" title="Emojis"><i data-lucide="smile"></i></button>
+                        </div>
+                        <button class="send-btn" id="sendBtn" disabled title="Enviar">
+                            <i data-lucide="send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===================== RIGHT SIDEBAR ===================== -->
+        <aside class="sidebar-right">
+            <div class="search-pill">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="placeholder-card">Em Breve</div>
+            <div class="placeholder-card">Em Breve</div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Inicializar ícones
+        lucide.createIcons();
+
+        // ======= LÓGICA DO CHAT =======
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatHistory = document.getElementById('chatHistory');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const contacts = document.querySelectorAll('.contact-item');
+
+        // Elementos do header do chat
+        const currentName = document.getElementById('currentName');
+        const currentStatus = document.getElementById('currentStatus');
+        const currentAvatar = document.getElementById('currentAvatar');
+
+        // Respostas automáticas variadas
+        const botResponses = [
+            "Muito bom! Gostei bastante.",
+            "Faz sentido. Vou dar uma olhada nisso depois.",
+            "Ah, que legal! Me conta mais.",
+            "Entendi perfeitamente.",
+            "Excelente trabalho!",
+            "Concordo com você.",
+            "Interessante abordagem, nunca tinha pensado assim."
+        ];
+
+        // Função para scrollar para o final
+        function scrollToBottom() {
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // Formatar hora atual
+        function getCurrentTime() {
+            const now = new Date();
+            return now.getHours().toString().padStart(2, '0') + ':' +
+                now.getMinutes().toString().padStart(2, '0');
+        }
+
+        // Adicionar mensagem na tela
+        function appendMessage(text, type) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `message-wrapper ${type}`;
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message';
+            msgDiv.textContent = text;
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'message-time';
+            timeDiv.textContent = getCurrentTime();
+
+            wrapper.appendChild(msgDiv);
+            wrapper.appendChild(timeDiv);
+
+            // Inserir antes do indicador de digitação
+            chatHistory.insertBefore(wrapper, typingIndicator);
+            scrollToBottom();
+        }
+
+        // Enviar mensagem do usuário e agendar resposta
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // 1. Mensagem do Usuário
+            appendMessage(text, 'sent');
+            chatInput.value = '';
+            sendBtn.disabled = true;
+
+            // Atualizar preview do contato ativo
+            const activeContactPreview = document.querySelector('.contact-item.active .contact-preview');
+            const activeContactTime = document.querySelector('.contact-item.active .contact-time');
+            if (activeContactPreview) activeContactPreview.textContent = `Você: ${text}`;
+            if (activeContactTime) activeContactTime.textContent = 'Agora';
+
+            // 2. Simular resposta recebida
+            typingIndicator.style.display = 'flex';
+            scrollToBottom();
+
+            const delay = 1500 + Math.random() * 1500; // Delay aleatório 1.5s - 3s
+
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+
+                const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+                appendMessage(randomResponse, 'received');
+
+                // Atualizar preview novamente com a resposta
+                if (activeContactPreview) activeContactPreview.textContent = randomResponse;
+
+                chatInput.focus();
+            }, delay);
+        }
+
+        // Listeners de Input
+        chatInput.addEventListener('input', () => {
+            sendBtn.disabled = chatInput.value.trim().length === 0;
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        // Trocar de contato
+        contacts.forEach(contact => {
+            contact.addEventListener('click', () => {
+                // Remover active de todos
+                contacts.forEach(c => c.classList.remove('active'));
+                // Adicionar active no clicado
+                contact.classList.add('active');
+
+                // Atualizar Header
+                const name = contact.getAttribute('data-name');
+                const status = contact.getAttribute('data-status');
+                const avatarHTML = contact.querySelector('.contact-avatar').innerHTML;
+                const avatarClass = contact.querySelector('.contact-avatar').className;
+
+                currentName.textContent = name;
+                currentStatus.textContent = status;
+                currentStatus.style.color = status.toLowerCase().includes('online') ? 'var(--green)' : 'var(--gray-400)';
+
+                currentAvatar.innerHTML = avatarHTML;
+                currentAvatar.className = avatarClass;
+                currentAvatar.id = 'currentAvatar'; // Restaurar o ID
+
+                // Limpar chat atual
+                const wrappers = chatHistory.querySelectorAll('.message-wrapper');
+                wrappers.forEach(w => w.remove());
+
+                // Esconder indicador caso esteja ativo
+                typingIndicator.style.display = 'none';
+
+                // Simular início de conversa nova
+                appendMessage(`Olá! Sou ${name.split(' ')[0]}, como posso ajudar?`, 'received');
+            });
+        });
+
+        // Garantir scroll no início
+        setTimeout(scrollToBottom, 100);
+    </script>
+</body>
+
+</html>

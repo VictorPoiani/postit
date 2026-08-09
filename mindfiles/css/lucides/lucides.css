@@ -1,0 +1,18 @@
+/* Seleciona o container para alinhar o ícone e o texto lado a lado */
+.lucide1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre o ícone e o texto "poiani" */
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+/* Seleciona especificamente o ícone do Lucide dentro desse container */
+.lucide1 [data-lucide], 
+.lucide1 svg {
+  width: 18px;          /* Largura do ícone */
+  height: 18px;         /* Altura do ícone */
+  stroke: #3b82f6;      /* Cor da linha (ex: Azul) */
+  stroke-width: 2.25px; /* Espessura do traço */
+  fill: transparent;    /* Fundo transparente */
+}

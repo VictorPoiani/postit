@@ -1,0 +1,443 @@
+.composer {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.composer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb199, #ff7a59);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.composer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.composer-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.composer-input {
+  width: 100%;
+  border: 2px solid var(--divider);
+  border-radius: var(--radius-md);
+  outline: none;
+  resize: none;
+  text-indent: 12px;
+  text-align: left;
+  padding: 10px 0px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  min-height: 46px;
+  line-height: 1.4;
+}
+
+.composer-input::placeholder {
+  color: var(--gray-400);
+}
+
+.composer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+.composer-image {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--pill-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.composer-music {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--pill-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.composer-emoji {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--pill-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.composer-count {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+.composer-submit {
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s ease;
+}
+
+.composer-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============ POSTS LIST (feed estilo Twitter) ============ */
+.posts-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card {
+  display: flex;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.post-card-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb199, #ff7a59);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.post-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.post-card-name {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.post-card-handle,
+.post-card-dot,
+.post-card-time {
+  color: var(--gray-600);
+}
+
+.post-card-text {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #27272a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.post-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-top: 12px;
+  max-width: 480px;
+}
+
+.post-card-actions .action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: color .15s ease, background .15s ease;
+}
+
+.post-card-actions .action i {
+  width: 17px;
+  height: 17px;
+}
+
+.post-card-actions .action:hover {
+  background: #f4f4f6;
+}
+
+.post-card-actions .action.reply:hover { color: var(--blue); }
+.post-card-actions .action.repost:hover { color: var(--green); }
+.post-card-actions .action.repost.active { color: var(--green); }
+.post-card-actions .action.like:hover { color: var(--red); }
+.post-card-actions .action.like.active { color: var(--red); }
+.post-card-actions .action.like.active i { fill: var(--red); }
+.post-card-actions .action.bookmark { margin-left: auto; }
+.post-card-actions .action.bookmark.active { color: var(--blue); }
+.post-card-actions .action.bookmark.active i { fill: var(--blue); }
+.post-card-actions .action.edit-post:hover { color: var(--blue); }
+.post-card-actions .action.delete-post:hover { color: var(--red); }
+
+/* ---- Edição inline do post (troca o texto por um textarea) ---- */
+.post-edit-box {
+  margin-top: 4px;
+}
+
+.post-edit-textarea {
+  min-height: 70px;
+  font-size: 15px;
+}
+
+.post-edit-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.post-edit-count {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+.post-edit-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-edit-cancel {
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.post-edit-cancel:hover {
+  color: var(--ink);
+}
+
+.post-edit-save {
+  padding: 7px 18px;
+}
+
+
+/* ============ Emoji picker ============ */
+.composer-footer {
+    position: relative;
+}
+
+.emoji-picker {
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    width: 240px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid var(--divider, #E5E7EB);
+    border-radius: var(--radius-sm, 12px);
+    box-shadow: 0 12px 30px -8px rgba(26, 26, 46, 0.25);
+    padding: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    z-index: 20;
+}
+
+.emoji-picker.open {
+    display: grid;
+}
+
+.emoji-picker button {
+    border: none;
+    background: transparent;
+    font-size: 19px;
+    line-height: 1;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.emoji-picker button:hover {
+    background: #f4f4f6;
+}
+
+/* ============ Mídia dentro dos posts do feed ============ */
+.post-card-image {
+    margin-top: 10px;
+    border-radius: var(--radius-md, 16px);
+    overflow: hidden;
+    border: 1px solid var(--divider, #E5E7EB);
+    max-width: 480px;
+}
+
+.post-card-image img {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+}
+
+.post-card-spotify {
+    margin-top: 10px;
+    max-width: 420px;
+    border-radius: var(--radius-md, 16px);
+    overflow: hidden;
+}
+
+/* ============ Post clicável (abre a tela de detalhe) ============ */
+.post-card {
+    cursor: pointer;
+}
+
+/* Dentro da tela de detalhe o card não deve mais ser clicável */
+.post-detail-card .post-card {
+    cursor: default;
+    border-bottom: none;
+    padding-top: 0;
+}
+
+.post-detail-card .post-card-text {
+    font-size: 17px;
+}
+
+/* ============ Tela de Post Aberto ============ */
+.post-detail-back-row {
+    margin-bottom: 18px;
+}
+
+.post-detail-extra-stats {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    margin: 4px 0 6px;
+    border-top: 1px solid var(--divider, #E5E7EB);
+    border-bottom: 1px solid var(--divider, #E5E7EB);
+    font-size: 14px;
+    color: var(--gray-600, #6b7280);
+}
+
+.post-detail-extra-stats b {
+    color: var(--ink, #111214);
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+/* ============ Cards de resposta (respostas ao post) ============ */
+.replies-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-card {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider, #E5E7EB);
+}
+
+.reply-card:last-child {
+    border-bottom: none;
+}
+
+.reply-card-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffb199, #ff7a59);
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.reply-card-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.reply-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.reply-card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+.reply-card-name {
+    font-weight: 700;
+    color: var(--ink, #111214);
+}
+
+.reply-card-handle,
+.reply-card-dot,
+.reply-card-time {
+    color: var(--gray-600, #6b7280);
+}
+
+.reply-card-text {
+    margin-top: 4px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: #27272a;
+    white-space: pre-wrap;
+    word-break: break-word;
+}

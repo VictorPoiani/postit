@@ -1,0 +1,671 @@
+/* ============================================================
+   NOTIFICAÇÕES / MURAL DE ATUALIZAÇÕES
+   Reaproveita os tokens definidos em global.css (--blue, --red,
+   --green, --divider, --radius-*, etc.) para manter a mesma
+   identidade visual do restante do Post It.
+   ============================================================ */
+
+.updates-board {
+  padding: 40px 34px 60px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.updates-header {
+  margin-bottom: 30px;
+}
+
+.updates-header .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.updates-header .eyebrow i {
+  width: 16px;
+  height: 16px;
+}
+
+.updates-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.updates-header p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--gray-600);
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+/* ---- Aviso para quem não pode postar (qualquer visitante futuro) ---- */
+.updates-readonly-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f4f4f6;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  color: var(--gray-600);
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+.updates-readonly-note i {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--gray-400);
+}
+
+/* ============ COMPOSER (só o dono do site vê isso) ============ */
+.update-composer {
+  border: 1.5px solid var(--divider);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px 18px;
+  margin-bottom: 40px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+}
+
+.update-composer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef4ff;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.update-composer-badge i {
+  width: 13px;
+  height: 13px;
+}
+
+.update-title-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ink);
+  padding: 4px 2px 12px;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 14px;
+}
+
+.update-title-input::placeholder {
+  color: var(--gray-400);
+  font-weight: 700;
+}
+
+/* ---- Editor de blocos ---- */
+.block-editor {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 2px;
+  border-radius: 8px;
+  transition: background .12s ease;
+}
+
+.block.drag-over {
+  background: #f4f8ff;
+}
+
+.block.dragging {
+  opacity: 0.4;
+}
+
+.block-side-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-top: 2px;
+  opacity: 0;
+  transition: opacity .12s ease;
+  flex-shrink: 0;
+}
+
+.block:hover .block-side-controls {
+  opacity: 1;
+}
+
+.block-icon-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.block-icon-btn:hover {
+  background: var(--pill-bg);
+  color: var(--ink);
+}
+
+.block-icon-btn.drag-handle {
+  cursor: grab;
+}
+
+.block-icon-btn.drag-handle:active {
+  cursor: grabbing;
+}
+
+.block-icon-btn i {
+  width: 15px;
+  height: 15px;
+}
+
+.block-content {
+  flex: 1;
+  min-width: 0;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.6;
+  padding: 4px 2px;
+}
+
+/* Placeholder "fantasma" para os blocos de texto vazios */
+.block-content:empty::before {
+  content: attr(data-placeholder);
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+.block[data-type="paragraph"] .block-content {
+  font-size: 15px;
+  color: #27272a;
+}
+
+.block[data-type="heading"] .block-content {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.block[data-type="list"] .block-content ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.block[data-type="list"] .block-content li {
+  font-size: 15px;
+  color: #27272a;
+  line-height: 1.6;
+}
+
+.block[data-type="divider"] .block-content {
+  padding: 10px 2px;
+  cursor: default;
+}
+
+.block[data-type="divider"] .block-content hr {
+  border: none;
+  border-top: 1.5px solid var(--divider);
+  margin: 0;
+}
+
+/* ---- Bloco de imagem ---- */
+.block-image-zone {
+  width: 100%;
+  border: 1.5px dashed var(--divider);
+  border-radius: var(--radius-md);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--gray-400);
+  cursor: pointer;
+  background: #fafafb;
+  transition: border-color .15s ease, color .15s ease;
+}
+
+.block-image-zone:hover {
+  border-color: var(--blue-soft);
+  color: var(--gray-600);
+}
+
+.block-image-zone i {
+  width: 24px;
+  height: 24px;
+}
+
+.block-image-zone span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.block-image-preview {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.block-image-preview img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.block-image-preview .block-image-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.block-image-preview .block-image-remove i {
+  width: 14px;
+  height: 14px;
+}
+
+.block-image-caption {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--gray-600);
+  outline: none;
+  padding: 2px;
+}
+
+.block-image-caption:empty::before {
+  content: attr(data-placeholder);
+  color: var(--gray-400);
+}
+
+.block-delete-btn {
+  opacity: 0;
+  transition: opacity .12s ease;
+  margin-top: 2px;
+}
+
+.block:hover .block-delete-btn {
+  opacity: 1;
+}
+
+.block-delete-btn:hover {
+  color: var(--red);
+}
+
+/* ---- Menu de comando "/" (estilo Notion) ---- */
+.slash-menu {
+  position: absolute;
+  z-index: 20;
+  background: #fff;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+  padding: 6px;
+  min-width: 220px;
+  display: none;
+}
+
+.slash-menu.open {
+  display: block;
+}
+
+.slash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.slash-menu-item:hover,
+.slash-menu-item.highlighted {
+  background: #f4f4f6;
+}
+
+.slash-menu-item .slash-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--pill-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.slash-menu-item .slash-icon i {
+  width: 16px;
+  height: 16px;
+  color: #374151;
+}
+
+.slash-menu-item .slash-label b {
+  display: block;
+  font-weight: 700;
+}
+
+.slash-menu-item .slash-label small {
+  color: var(--gray-600);
+  font-size: 12px;
+}
+
+/* ---- Rodapé do editor ---- */
+.block-editor-footer {
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.add-block-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: var(--pill-bg);
+  color: #374151;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.add-block-btn i {
+  width: 15px;
+  height: 15px;
+}
+
+.update-composer-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.composer-hint {
+  font-size: 12px;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+
+/* ============ TIMELINE / FEED DE ATUALIZAÇÕES ============ */
+.updates-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-card {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding: 4px 0 32px 4px;
+}
+
+.update-card-rail {
+  position: relative;
+  width: 14px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.update-card-rail::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: -32px;
+  width: 2px;
+  background: var(--divider);
+}
+
+.update-card:last-child .update-card-rail::before {
+  display: none;
+}
+
+.update-card-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--blue);
+  margin-top: 6px;
+  box-shadow: 0 0 0 4px #eef4ff;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.update-card-body {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  background: #fff;
+}
+
+.update-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.update-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #eef4ff;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.update-card-badge i {
+  width: 11px;
+  height: 11px;
+}
+
+.update-card-time {
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.update-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.update-card-content p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #27272a;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.update-card-content h4 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 14px 0 8px;
+}
+
+.update-card-content ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.update-card-content li {
+  font-size: 15px;
+  color: #27272a;
+  line-height: 1.6;
+}
+
+.update-card-content hr {
+  border: none;
+  border-top: 1.5px solid var(--divider);
+  margin: 16px 0;
+}
+
+.update-card-content figure {
+  margin: 10px 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.update-card-content figure img {
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  display: block;
+}
+
+.update-card-content figcaption {
+  font-size: 13px;
+  color: var(--gray-600);
+  padding: 6px 2px 0;
+}
+
+.update-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--divider);
+}
+
+.update-card-actions .action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.update-card-actions .action i {
+  width: 16px;
+  height: 16px;
+}
+
+.update-card-actions .action:hover {
+  background: #f4f4f6;
+}
+
+.update-card-actions .action.like.active {
+  color: var(--red);
+}
+
+.update-card-actions .action.like.active i {
+  fill: var(--red);
+}
+
+.update-card-actions .action.edit-update:hover { color: var(--blue); }
+.update-card-actions .action.delete-update:hover { color: var(--red); }
+
+/* ---- Banner mostrado quando o composer está editando uma atualização existente ---- */
+.update-editing-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #fff7e6;
+  border: 1px solid #f4dca0;
+  color: #92650a;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+}
+
+.update-editing-banner span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-editing-banner i {
+  width: 15px;
+  height: 15px;
+}
+
+.update-editing-banner button {
+  background: none;
+  border: none;
+  color: #92650a;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ============ RESPONSIVO ============ */
+@media (max-width: 768px) {
+  .updates-board {
+    padding: 24px 16px 40px;
+  }
+
+  .update-card-rail {
+    display: none;
+  }
+
+  .update-composer-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

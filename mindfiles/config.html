@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações — Victor Poiani</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Globais e específicos -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/config.css">
+</head>
+
+<body>
+    <div class="app">
+        <!-- ============ LEFT Sidebar ============ -->
+        <aside class="sidebar-left">
+            <div class="logo">
+                <img src="assets/net/postit.png" alt="Logo do site">
+            </div>
+
+            <ul class="nav">
+                <li data-nav="home"><a class="nav-link" href="inicio.html"><i data-lucide="home"></i><span class="label">Home</span></a></li>
+                <li data-nav="explore"><i data-lucide="compass"></i><span class="label">Explorar</span></li>
+                <li data-nav="notifications"><a class="nav-link" href="notificacoes.html"><i data-lucide="blocks"></i><span class="label">Atualizações</span></a></li>
+                <li data-nav="messages"><a class="nav-link" href="direct.html"><i data-lucide="mail"></i><span class="label">Mensagens</span></a></li>
+                <li data-nav="support"><a class="nav-link" href="apoie.html"><i data-lucide="heartHandshake"></i><span class="label">Apoie</span></a></li>
+                <li data-nav="settings"></li><a class="nav-link active" href="config.html"><i data-lucide="settings"></i><span class="label">Configurações</span></a></li>
+            </ul>
+
+            <div class="sidebar-left-footer">
+                <div class="mini-avatar">
+                    <svg viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#ffd8a8" />
+                        <circle cx="14" cy="18" r="2" fill="#2b2b2b" />
+                        <circle cx="26" cy="18" r="2" fill="#2b2b2b" />
+                        <path d="M12 25c3 4 13 4 16 0" stroke="#2b2b2b" stroke-width="2" fill="none" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="mini-user-info">
+                    <div class="mini-user-name">Victor Poiani, <span class="sobriquet">o criador</span></div>
+                    <div class="mini-user-handle"><i data-lucide="atSign"></i>poiani</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============ MAIN CONTENT (TELA PRINCIPAL) ============ -->
+        <main class="main">
+            <div class="config-screen">
+                <div class="config-header">
+                    <h1>Configurações</h1>
+                    <p>Gerencie a aparência, acessibilidade e preferências do seu Post it.</p>
+                </div>
+
+                <!-- SESSÃO 1: DISPLAY / EXIBIÇÃO -->
+                <section class="config-section">
+                    <div class="config-section-title">
+                        <i data-lucide="monitor"></i> Exibição e Aparência
+                    </div>
+
+                    <!-- Troca de Tema -->
+                    <div class="config-item">
+                        <div class="config-item-label">
+                            <span>Tema da Interface</span>
+                        </div>
+                        <p class="config-item-desc">Escolha entre o tema claro e escuro para a sua navegação.</p>
+                        <div class="theme-options">
+                            <button type="button" class="theme-card active" id="themeLightBtn" data-theme-val="light">
+                                <i data-lucide="sun"></i> Claro
+                            </button>
+                            <button type="button" class="theme-card" id="themeDarkBtn" data-theme-val="dark">
+                                <i data-lucide="moon"></i> Escuro
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ajuste Dinâmico de Fonte -->
+                    <div class="config-item">
+                        <div class="config-item-label">
+                            <span>Tamanho da Fonte</span>
+                            <span class="font-value-badge" id="fontValueBadge">16px</span>
+                        </div>
+                        <p class="config-item-desc">Ajuste a escala tipográfica de todo o aplicativo.</p>
+                        <div class="font-slider-container">
+                            <span style="font-size: 12px; font-weight: bold;">A</span>
+                            <input type="range" id="fontSizeSlider" min="13" max="20" value="16" step="1">
+                            <span style="font-size: 20px; font-weight: bold;">A</span>
+                        </div>
+
+                        <!-- Box de Pré-visualização Dinâmica -->
+                        <div class="font-preview-box" id="fontPreviewBox">
+                            <strong>Pré-visualização do texto:</strong><br>
+                            Apenas poste. O aprendizado contínuo gera resultados incríveis.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SESSÃO 2: ACESSIBILIDADE -->
+                <section class="config-section">
+                    <div class="config-section-title">
+                        <i data-lucide="eye"></i> Acessibilidade
+                    </div>
+
+                    <div class="config-item">
+                        <div class="config-item-label">
+                            <span>Modo de Alto Contraste</span>
+                            <label class="switch-label">
+                                <input type="checkbox" id="highContrastToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p class="config-item-desc">Aumenta o contraste entre texto e fundo para facilitar a leitura.</p>
+                    </div>
+                </section>
+
+                <!-- SESSÃO 3: PRIVACIDADE E TERMOS DE USO -->
+                <section class="config-section">
+                    <div class="config-section-title">
+                        <i data-lucide="shield-check"></i> Privacidade e Termos
+                    </div>
+
+                    <a href="privacidade.html" class="config-link-item" target="_blank" rel="noopener noreferrer">
+                        <span>Políticas de Privacidade</span>
+                        <i data-lucide="external-link"></i>
+                    </a>
+
+                    <a href="termos.html" class="config-link-item" target="_blank" rel="noopener noreferrer">
+                        <span>Termos de Uso</span>
+                        <i data-lucide="external-link"></i>
+                    </a>
+                </section>
+
+                <!-- SESSÃO 4: ESPAÇO PARA FUTURAS CONFIGURAÇÕES -->
+                <section class="config-section" style="opacity: 0.7;">
+                    <div class="config-section-title">
+                        <i data-lucide="bell"></i> Notificações (Em Breve)
+                    </div>
+                    <p class="config-item-desc">Em breve você poderá personalizar o recebimento de notificações e alertas de interações.</p>
+                </section>
+            </div>
+        </main>
+
+        <!-- ===================== RIGHT SIDEBAR ===================== -->
+        <aside class="sidebar-right">
+            <div class="search-pill">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="placeholder-card">Em Breve</div>
+            <div class="placeholder-card">Em Breve</div>
+        </aside>
+    </div>
+
+    <!-- Scripts de Ícones e Lógica de Configuração -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="js/config/config.js"></script>
+</body>
+</html>
