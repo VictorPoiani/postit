@@ -1,0 +1,136 @@
+/* ============ TELA EM CONSTRUÇÃO ============ */
+.construction-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.construction-card {
+  max-width: 460px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Container dos Ícones Animados */
+.construction-icon-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Engrenagem Girando */
+.gear-icon {
+  top: 70px;
+  right: 15px;
+  position: absolute;
+  color: var(--blue-soft);
+  animation: spinGear 6s linear infinite;
+}
+
+.gear-icon i {
+  width: 72px;
+  height: 72px;
+}
+
+/* Martelo Batendo */
+.hammer-icon {
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  color: var(--blue-soft);
+  transform-origin: bottom left;
+  animation: tapHammer 1.2s ease-in-out infinite alternate;
+}
+
+.hammer-icon i {
+  width: 36px;
+  height: 36px;
+}
+
+/* Animação da Engrenagem */
+@keyframes spinGear {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animação do Martelo */
+@keyframes tapHammer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-35deg); }
+}
+
+.construction-card h2 {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.construction-card p {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* Barra de Progresso Listrada Animada */
+.stripe-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #0091ff,
+    #0b71ff 12px,
+    #f3f3f4 12px,
+    #ffffff 24px
+  );
+  background-size: 200% 200%;
+  animation: moveStripes 6s linear infinite;
+  margin-bottom: 28px;
+}
+
+@keyframes moveStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 0; }
+}
+
+/* Botão Voltar */
+.back-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #f4f4f6;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14px;
+  border: 1.5px solid var(--divider);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-home-btn:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+.back-home-btn i {
+  width: 16px;
+  height: 16px;
+}
