@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso — Post it</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos globais da aplicação -->
+    <link rel="stylesheet" href="css/global.css">
+    
+    <style>
+        .legal-screen {
+            padding: 28px 32px;
+            max-width: 900px;
+            margin: 0 auto;
+            color: var(--ink, #111214);
+            line-height: 1.65;
+            font-size: var(--base-font-size, 15px);
+        }
+
+        .legal-back-row {
+            margin-bottom: 24px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--blue, #2563EB);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: var(--input-bg, #fafafa);
+            border: 1px solid var(--divider, #E5E7EB);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--hover-bg, #f4f4f6);
+            transform: translateX(-2px);
+        }
+
+        .legal-header {
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--divider, #E5E7EB);
+        }
+
+        .legal-header h1 {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--ink, #111214);
+            margin-bottom: 8px;
+        }
+
+        .legal-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--gray-600, #6b7280);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .legal-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legal-intro {
+            background: var(--input-bg, #fafafa);
+            border-left: 4px solid var(--blue, #2563EB);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius-sm, 12px) var(--radius-sm, 12px) 0;
+            margin-bottom: 32px;
+            font-size: 15px;
+            color: var(--ink-soft, #1a1a1a);
+        }
+
+        .legal-section {
+            margin-bottom: 36px;
+        }
+
+        .legal-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink, #111214);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .legal-section h2 i {
+            width: 22px;
+            height: 22px;
+            color: var(--blue, #2563EB);
+            flex-shrink: 0;
+        }
+
+        .legal-section p {
+            margin-bottom: 14px;
+            color: var(--ink-soft, #1a1a1a);
+            text-align: justify;
+        }
+
+        .legal-section ul, .legal-section ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: var(--ink-soft, #1a1a1a);
+        }
+
+        .legal-section li {
+            margin-bottom: 8px;
+        }
+
+        .legal-section li strong {
+            color: var(--ink, #111214);
+        }
+
+        .highlight-box {
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: var(--radius-md, 16px);
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--blue, #2563EB);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legal-footer-contact {
+            background: var(--card-bg, #ffffff);
+            border: 1px solid var(--divider, #E5E7EB);
+            border-radius: var(--radius-lg, 22px);
+            padding: 24px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .legal-footer-contact h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .legal-footer-contact p {
+            color: var(--gray-600, #6b7280);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--pill-bg, #ededed);
+            color: var(--pill-ink, #111827);
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .legal-screen {
+                padding: 18px 16px;
+            }
+            .legal-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- ============ LEFT Sidebar ============ -->
+        <aside class="sidebar-left">
+            <div class="logo">
+                <img src="assets/net/postit.png" alt="Logo Post it">
+            </div>
+
+            <ul class="nav">
+                <li data-nav="home"><a class="nav-link" href="inicio.html"><i data-lucide="home"></i><span class="label">Home</span></a></li>
+                <li data-nav="explore"><i data-lucide="compass"></i><span class="label">Explorar</span></li>
+                <li data-nav="notifications"><a class="nav-link" href="notificacoes.html"><i data-lucide="blocks"></i><span class="label">Atualizações</span></a></li>
+                <li data-nav="messages"><a class="nav-link" href="direct.html"><i data-lucide="mail"></i><span class="label">Mensagens</span></a></li>
+                <li data-nav="support"><a class="nav-link" href="apoie.html"><i data-lucide="heartHandshake"></i><span class="label">Apoie</span></a></li>
+                <li data-nav="settings"><a class="nav-link" href="config.html"><i data-lucide="settings"></i><span class="label">Configurações</span></a></li>
+            </ul>
+
+            <div class="sidebar-left-footer">
+                <div class="mini-avatar">
+                    <svg viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#ffd8a8" />
+                        <circle cx="14" cy="18" r="2" fill="#2b2b2b" />
+                        <circle cx="26" cy="18" r="2" fill="#2b2b2b" />
+                        <path d="M12 25c3 4 13 4 16 0" stroke="#2b2b2b" stroke-width="2" fill="none" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="mini-user-info">
+                    <div class="mini-user-name">Victor Poiani, <span class="sobriquet">o criador</span></div>  
+                    <div class="mini-user-handle"><i data-lucide="atSign"></i>poiani</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============ MAIN CONTENT ============ -->
+        <main class="main">
+            <div class="legal-screen">
+                <div class="legal-back-row">
+                    <a href="config.html" class="back-btn">
+                        <i data-lucide="arrow-left"></i> Voltar para Configurações
+                    </a>
+                </div>
+
+                <div class="legal-header">
+                    <h1>Termos e Condições de Uso</h1>
+                    <div class="legal-meta">
+                        <span><i data-lucide="calendar"></i> Última atualização: Agosto de 2026</span>
+                        <span><i data-lucide="shield"></i> Versão 1.0</span>
+                    </div>
+                </div>
+
+                <div class="legal-intro">
+                    Bem-vindo ao <strong>Post it</strong>! Ao acessar ou utilizar nossa plataforma, você concorda expressa e integralmente com estes Termos de Uso. Recomendamos a leitura atenta deste documento, pois ele estabelece os direitos e obrigações entre você (usuário) e o mantenedor da plataforma.
+                </div>
+
+                <!-- CLÁUSULA 1 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="file-text"></i> 1. Aceitação e Objeto</h2>
+                    <p>
+                        Estes Termos e Condições de Uso regulam o acesso e a utilização da plataforma web <strong>Post it</strong>. O Post it é uma rede social e espaço de publicação comunitária voltado ao compartilhamento de conhecimentos, pensamentos, mídias e interações interpessoais sob a filosofia central de <em>"apenas poste"</em>.
+                    </p>
+                    <p>
+                        Ao realizar seu cadastro, navegar, publicar ou interagir na plataforma, você declara ter lido, compreendido e aceito irrevogavelmente estes Termos, bem como a nossa <a href="privacidade.html" style="color: var(--blue); font-weight: 600;">Política de Privacidade</a>. Se você não concordar com qualquer disposição aqui estabelecida, deve interromper imediatamente o uso do serviço.
+                    </p>
+                </section>
+
+                <!-- CLÁUSULA 2 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="user-check"></i> 2. Elegibilidade e Cadastro de Conta</h2>
+                    <p>
+                        Para utilizar determinadas funcionalidades do Post it, como criar postagens, personalizar perfil, interagir com outros membros e salvar preferências, é necessário realizar um cadastro.
+                    </p>
+                    <ul>
+                        <li><strong>Idade Mínima:</strong> O serviço é destinado a pessoas com idade igual ou superior a 13 (treze) anos. Usuários menores de 18 anos declaram estar autorizados por seus pais ou responsáveis legais.</li>
+                        <li><strong>Veracidade dos Dados:</strong> Você se compromete a fornecer informações verdadeira, exatas e atualizadas em seu cadastro e perfil (como nome de exibição, alcunha e dados sociais).</li>
+                        <li><strong>Segurança da Conta:</strong> O usuário é o único e exclusivo responsável pela confidencialidade de suas credenciais de acesso (senha e e-mail). Todas as atividades realizadas em sua conta serão de sua inteira responsabilidade.</li>
+                        <li><strong>Uso Pessoal:</strong> Sua conta é pessoal e intransferível, sendo vedada a cessão, venda ou aluguel de perfil a terceiros.</li>
+                    </ul>
+                </section>
+
+                <!-- CLÁUSULA 3 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="alert-triangle"></i> 3. Diretrizes de Conduta e Uso Aceitável</h2>
+                    <p>
+                        O Post it preza por um ambiente saudável, respeitoso e colaborativo. Ao utilizar a plataforma, você concorda expressamente em <strong>NÃO</strong> praticar nenhuma das seguintes condutas:
+                    </p>
+                    <ol>
+                        <li><strong>Discurso de Ódio e Discriminação:</strong> Publicar conteúdo que promova, incite ou apoie a violência, discriminação, preconceito ou ódio contra indivíduos ou grupos com base em raça, etnia, religião, gênero, orientação sexual, deficiência ou nacionalidade.</li>
+                        <li><strong>Assédio e Intimidação:</strong> Praticar bullying, perseguir, ameaçar, extorquir ou assediar qualquer outro usuário da comunidade.</li>
+                        <li><strong>Conteúdo Ilícito ou Explícito:</strong> Enviar mídias com pornografia não solicitada, violência explícita, apologia a crimes, drogas ilícitas ou violação da legislação brasileira vigente.</li>
+                        <li><strong>Violação de Direitos Autorais:</strong> Postar conteúdos, mídias ou textos dos quais você não possua os direitos de autor ou autorização expressa do titular.</li>
+                        <li><strong>Spam e Automação Não Autorizada:</strong> Utilizar robôs, scripts, bots, scrapers ou mecanismos automatizados para criar contas massivas, enviar mensagens automatizadas (spam) ou coletar dados dos usuários sem consentimento.</li>
+                        <li><strong>Ataques Técnicos:</strong> Tentar burlar medidas de segurança, injetar código malicioso (como SQLi, XSS), comprometer a integridade dos servidores ou realizar ataques de negação de serviço (DDoS).</li>
+                        <li><strong>Falsidade Ideológica:</strong> Personificar pessoas físicas ou jurídicas de forma enganosa ou fraudulenta.</li>
+                    </ol>
+                </section>
+
+                <!-- CLÁUSULA 4 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="copyright"></i> 4. Propriedade Intelectual e Licenciamento</h2>
+                    <p>
+                        A relação de direitos autorais e propriedade intelectual no Post it funciona de forma transparente e justa:
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3><i data-lucide="check-circle"></i> Titularidade do Usuário</h3>
+                        <p style="margin-bottom:0;">
+                            Você retém a propriedade integral de todos os direitos autorais e intelectuais sobre as postagens, textos, comentários e imagens que publica na plataforma. O Post it não reivindica a posse do seu conteúdo original.
+                        </p>
+                    </div>
+
+                    <ul>
+                        <li><strong>Licença Concedida à Plataforma:</strong> Ao publicar conteúdo no Post it, você concede ao mantenedor da plataforma uma licença não exclusiva, gratuita, mundial, isenta de royalties e passível de sublicenciamento exclusivamente para operar, exibir, armazenar, reformatar, reproduzir e distribuir o referido conteúdo no âmbito da própria plataforma e seus canais associados.</li>
+                        <li><strong>Direitos da Plataforma:</strong> O código-fonte, marcas, logotipos, layout, design de interface, elementos gráficos e o nome "Post it" são de propriedade exclusiva do mantenedor do projeto e protegidos pela legislação de propriedade intelectual. É proibida a reprodução ou cópia não autorizada sem prévia anuência por escrito.</li>
+                    </ul>
+                </section>
+
+                <!-- CLÁUSULA 5 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="shield-alert"></i> 5. Moderação de Conteúdo e Encerramento</h2>
+                    <p>
+                        Buscando manter a qualidade e segurança da comunidade, o Post it reserva-se os seguintes direitos:
+                    </p>
+                    <ul>
+                        <li><strong>Moderação e Remoção:</strong> Remover, ocultar, editar ou restringir o acesso a qualquer postagem ou comentário que viole estes Termos ou que seja objeto de notificação válida de violação de direitos.</li>
+                        <li><strong>Suspensão ou Cancelamento:</strong> Suspender temporariamente ou encerrar definitivamente a conta de qualquer usuário em caso de descumprimento reincidente ou grave destas regras, sem necessidade de aviso prévio e sem direito a indenização.</li>
+                        <li><strong>Denúncias:</strong> Disponibilizar aos usuários canais simples para reportar conteúdos inadequados ou violações de conduta.</li>
+                    </ul>
+                </section>
+
+                <!-- CLÁUSULA 6 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="layers"></i> 6. Integrações e Serviços de Terceiros</h2>
+                    <p>
+                        A plataforma Post it utiliza serviços de terceiros para seu pleno funcionamento, incluindo infraestrutura de banco de dados e autenticação via <strong>Supabase</strong> e reprodutores de áudio integrados via <strong>Spotify API</strong>.
+                    </p>
+                    <p>
+                        Ao utilizar recursos integrados (como players de música ou links externos), você reconhece e aceita que esses serviços possuem seus próprios termos de uso e políticas de privacidade, sobre os quais o Post it não exerce controle nem assume responsabilidade direta.
+                    </p>
+                </section>
+
+                <!-- CLÁUSULA 7 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="slash"></i> 7. Limitação de Responsabilidade</h2>
+                    <p>
+                        A plataforma é disponibilizada no estado em que se encontra (<em>"AS IS"</em> e <em>"AS AVAILABLE"</em>). Em toda a extensão permitida pela legislação aplicável:
+                    </p>
+                    <ul>
+                        <li><strong>Isenção de Garantias:</strong> Não garantimos que a plataforma estará disponível de forma contínua, ininterrupta ou completamente isenta de falhas operacionais, bugs ou vírus.</li>
+                        <li><strong>Conteúdo de Terceiros:</strong> O Post it atua como provedor de aplicação de internet nos termos do <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong> e não responde civilmente por danos decorrentes de conteúdos gerados por seus usuários, salvo descumprimento de ordem judicial específica para remoção.</li>
+                        <li><strong>Danos Indiretos:</strong> Em nenhuma hipótese o criador ou mantenedor do serviço será responsável por lucros cessantes, perdas de dados ou danos indiretos decorrentes do uso ou da impossibilidade de uso da plataforma.</li>
+                    </ul>
+                </section>
+
+                <!-- CLÁUSULA 8 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="refresh-cw"></i> 8. Alterações destes Termos</h2>
+                    <p>
+                        Estes Termos de Uso podem ser alterados ou atualizados periodicamente para refletir melhorias no serviço, mudanças legislativas ou novos recursos.
+                    </p>
+                    <p>
+                        Sempre que houver modificações relevantes, a data de atualização no topo deste documento será revisada e um aviso poderá ser exibido na seção de Notificações ou Atualizações do aplicativo. O uso continuado do Post it após tais alterações constitui aceitação tácita dos novos termos.
+                    </p>
+                </section>
+
+                <!-- CLÁUSULA 9 -->
+                <section class="legal-section">
+                    <h2><i data-lucide="gavel"></i> 9. Legislação Aplicável e Foro</h2>
+                    <p>
+                        Estes Termos são regidos e interpretados estritamente de acordo com as leis da <strong>República Federativa do Brasil</strong>, em especial o Código Civil, o Marco Civil da Internet (Lei nº 12.965/2014) e a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
+                    </p>
+                    <p>
+                        Fica eleito o Foro da Comarca de domicílio do mantenedor do projeto para dirimir quaisquer dúvidas ou litígios oriundos do presente documento, com renúncia expressa a qualquer outro, por mais privilegiado que seja.
+                    </p>
+                </section>
+
+                <!-- RODAPÉ DE CONTATO -->
+                <div class="legal-footer-contact">
+                    <h3>Dúvidas sobre os Termos de Uso?</h3>
+                    <p>Se você possui dúvidas, sugestões ou precisa reportar alguma irregularidade, entre em contato com nossa equipe.</p>
+                    <a href="direct.html" class="contact-pill">
+                        <i data-lucide="mail"></i> Enviar mensagem no Post it
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===================== RIGHT SIDEBAR ===================== -->
+        <aside class="sidebar-right">
+            <div class="search-pill">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="placeholder-card">Termos & Condições</div>
+            <div class="placeholder-card">Post it v1.0</div>
+        </aside>
+    </div>
+
+    <!-- Scripts de Ícones e Ajustes Globais -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+            // Aplica preferências salvas de fonte e tema
+            const savedSettings = localStorage.getItem('postit_user_settings');
+            if (savedSettings) {
+                try {
+                    const parsed = JSON.parse(savedSettings);
+                    if (parsed.theme) document.documentElement.setAttribute('data-theme', parsed.theme);
+                    if (parsed.fontSize) document.documentElement.style.setProperty('--base-font-size', `${parsed.fontSize}px`);
+                    if (parsed.highContrast) document.documentElement.setAttribute('data-contrast', 'high');
+                } catch(e) {}
+            }
+        });
+    </script>
+</body>
+
+</html>

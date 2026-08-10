@@ -1,0 +1,206 @@
+/* ============ TELA DE CONFIGURAÇÕES ============ */
+.config-screen {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  color: var(--ink);
+  font-size: var(--base-font-size);
+}
+
+.config-header h1 {
+  font-size: calc(var(--base-font-size) * 1.5);
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.config-header p {
+  color: var(--gray-600);
+  font-size: 0.9em;
+}
+
+.config-section {
+  background: var(--card-bg);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.config-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.config-section-title i {
+  width: 20px;
+  height: 20px;
+  color: var(--blue);
+}
+
+.config-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.config-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.config-item-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.config-item-label span {
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.config-item-desc {
+  font-size: 0.85em;
+  color: var(--gray-600);
+}
+
+/* Opções de Tema (Seletor) */
+.theme-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.theme-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--divider);
+  background: var(--input-bg);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+
+.theme-card:hover {
+  background: var(--hover-bg);
+}
+
+.theme-card.active {
+  border-color: var(--blue);
+  background: var(--hover-bg);
+  color: var(--blue);
+}
+
+/* Slider de Fonte */
+.font-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.font-slider-container input[type="range"] {
+  flex: 1;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.font-value-badge {
+  font-weight: 700;
+  font-size: 0.9em;
+  background: var(--pill-bg);
+  color: var(--pill-ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Preview Box Dinâmica */
+.font-preview-box {
+  background: var(--input-bg);
+  border: 1.5px dashed var(--divider);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-top: 8px;
+  font-size: var(--base-font-size);
+  line-height: 1.5;
+  color: var(--ink);
+  transition: font-size 0.15s ease;
+}
+
+/* Switch Toggle UI */
+.switch-label {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch-label input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--divider);
+  transition: .2s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--blue);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Links da Seção de Privacidade */
+.config-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--input-bg);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9em;
+  transition: background 0.2s ease;
+}
+
+.config-link-item:hover {
+  background: var(--hover-bg);
+}

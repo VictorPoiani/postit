@@ -1,0 +1,58 @@
+/* ================= TEMA CLARO (PADRÃO) ================= */
+:root {
+  --bg: #ffffff;
+  --bg-app: #eef0f4;
+  --card-bg: #ffffff;
+  --input-bg: #fafafa;
+  --ink: #111214;
+  --ink-soft: #1a1a1a;
+  --gray-600: #6b7280;
+  --gray-400: #9ca3af;
+  --red: #E63946;
+  --green: #1DB954;
+  --blue: #2563EB;
+  --blue-soft: #93C5FD;
+  --pill-bg: #ededed;
+  --pill-ink: #111827;
+  --divider: #E5E7EB;
+  --hover-bg: #f4f4f6;
+  
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  
+  /* Controle Dinâmico de Fonte */
+  --base-font-size: 16px;
+}
+
+/* ================= TEMA ESCURO ================= */
+[data-theme="dark"] {
+  --bg: #000000;
+  --bg-app: #0c0c0e;
+  --card-bg: #131313;
+  --input-bg: #292929;
+  --ink: #ffffff;
+  --ink-soft: #e4e4e7;
+  --gray-600: #a1a1aa;
+  --gray-400: #71717a;
+  --pill-bg: #3f3f46;
+  --pill-ink: #f4f4f5;
+  --divider: #27272a;
+  --hover-bg: #27272a;
+}
+
+/* ================= MODO ALTO CONTRASTE ================= */
+[data-contrast="high"] {
+  --bg: #000000 !important;
+  --bg-app: #000000 !important;
+  --card-bg: #000000 !important;
+  --input-bg: #000000 !important;
+  --ink: #ffffff !important;
+  --ink-soft: #ffffff !important;
+  --gray-600: #ffffff !important;
+  --gray-400: #e4e4e7 !important;
+  --divider: #ffffff !important;
+  --blue: #ffff00 !important; /* Amarelo de alto contraste */
+  --pill-bg: #000000 !important;
+  --pill-ink: #ffffff !important;
+}
